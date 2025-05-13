@@ -12,17 +12,19 @@
 
 #include "./headers/get_next_line.h"
 #include <stdio.h>
+#include <unistd.h>
 #include <fcntl.h>
 
 int	main(void)
 {
 	int	fd;
-	int	text;
 
 	fd = open("hola.txt", O_RDONLY);
-	while (text = get_next_line(fd))
+	printf("%s\n", get_next_line(fd));
+/* 	while (text = get_next_line(fd))
 	{
-		printf("%s", text);
-	}
+		printf("%d", text);
+	} */
+	close(fd);
 	return (0);
 }

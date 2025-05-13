@@ -12,5 +12,8 @@
 
 #ifndef GET_NEXT_LINE_H_
 # define GET_NEXT_LINE_H_
+#include <unistd.h>
+#include <stdlib.h>
+#define BUFFER_SIZE 50
 char	*get_next_line(int fd);
 #endif
