@@ -6,7 +6,7 @@
 /*   By: juamanri <juamanri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 11:55:38 by juamanri          #+#    #+#             */
-/*   Updated: 2025/05/14 12:22:07 by juamanri         ###   ########.fr       */
+/*   Updated: 2025/05/14 13:10:44 by juamanri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(void)
 	// printf("%s\n", get_next_line(fd));
 	while ((text = get_next_line(fd)))
 	{
-		printf("%s\n", text);
+		printf("%s", text);
 	}
 	close(fd);
 	return (0);

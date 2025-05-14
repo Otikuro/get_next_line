@@ -6,7 +6,7 @@
 /*   By: juamanri <juamanri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:27:10 by juamanri          #+#    #+#             */
-/*   Updated: 2025/05/14 12:42:05 by juamanri         ###   ########.fr       */
+/*   Updated: 2025/05/14 13:42:12 by juamanri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-#include <stdio.h>
-
-
 int	ft_initialize_strings(char **stacked, char **buffer)
 {
 	*stacked = (char *)malloc(sizeof(char) * 1);
@@ -88,21 +85,27 @@ char	*get_next_line(int fd)
 	int			byte;
 	int			line_len;
 
-	if (fd == -1)
+	if (fd == -1 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!ft_initialize_strings(&stacked, &buffer))
 		return (NULL);
-	printf("\tLeftover: %s", leftover);
-	ft_strjoin(stacked, leftover);
+	stacked = ft_strjoin(stacked, leftover);
+	if (ft_strchr(stacked, '\n'))
+		buffer = stacked;
 	while (!ft_strchr(buffer, '\n'))
 	{
 		byte = read(fd, buffer, BUFFER_SIZE);
-		if (!byte)
+		if (byte == 0 && stacked[0] != '\0')
+		{
+			leftover = "";
+			return (stacked);
+		}
+		else if (byte == 0)
 			return (NULL);
 		buffer[byte] = '\0';
 		stacked = ft_strjoin(stacked, buffer);
 	}
 	line_len = ft_line_len(buffer);
-	leftover = ft_substr(buffer, line_len, (byte - line_len));
-	return (ft_substr(stacked, 0, ft_line_len(stacked)));
+	leftover = ft_substr(buffer, line_len + 1, (byte - line_len));
+	return (ft_substr(stacked, 0, ft_line_len(stacked) + 1));
 }
