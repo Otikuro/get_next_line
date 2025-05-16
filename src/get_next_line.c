@@ -6,40 +6,24 @@
 /*   By: juamanri <juamanri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:27:10 by juamanri          #+#    #+#             */
-/*   Updated: 2025/05/16 09:55:00 by juamanri         ###   ########.fr       */
+/*   Updated: 2025/05/16 12:21:37 by juamanri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/get_next_line.h"
 
-int	ft_line_len(char *str)
+int	ft_get_line_len(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] && str[i] != '\n')
+	while (str[i])
 	{
 		if (str[i] == '\n')
-			return();
+			return (i);
 		i++;
 	}
-	return (i);
-}
-
-char	*ft_strchr(const char *s, int c)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == (char)c)
-			return ((char *)&s[i]);
-		i++;
-	}
-	if (s[i] == (char)c)
-		return ((char *)&s[i]);
-	return (0);
+	return (-1);
 }
 
 char	*ft_strjoin(char *s1, char *s2, int delete)
@@ -98,9 +82,9 @@ char	*get_next_line(int fd)
 	if (!ft_initialize_strings(&stacked, &buffer))
 		return (NULL);
 	stacked = ft_strjoin(stacked, leftover, 0);
-	if (ft_strchr(stacked, '\n'))
+	if (ft_get_line_len(stacked) != -1)
 		buffer = stacked;
-	while (!ft_strchr(buffer, '\n'))
+	while (ft_get_line_len(buffer) == -1)
 	{
 		byte = read(fd, buffer, BUFFER_SIZE);
 		if (byte == 0 && stacked[0] != '\0')
@@ -117,8 +101,8 @@ char	*get_next_line(int fd)
 		buffer[byte] = '\0';
 		stacked = ft_strjoin(stacked, buffer, 1);
 	}
-	line_len = ft_line_len(buffer);
+	line_len = ft_get_line_len(buffer);
 	leftover = ft_substr(buffer, line_len + 1, (byte - line_len));
 	//free(buffer);
-	return (ft_substr(stacked, 0, ft_line_len(stacked) + 1));
+	return (ft_substr(stacked, 0, ft_get_line_len(stacked) + 1));
 }
