@@ -6,7 +6,7 @@
 /*   By: juamanri <juamanri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:27:10 by juamanri          #+#    #+#             */
-/*   Updated: 2025/05/14 13:42:12 by juamanri         ###   ########.fr       */
+/*   Updated: 2025/05/16 09:55:00 by juamanri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ int	ft_line_len(char *str)
 
 	i = 0;
 	while (str[i] && str[i] != '\n')
+	{
+		if (str[i] == '\n')
+			return();
 		i++;
+	}
 	return (i);
 }
 
@@ -38,7 +42,7 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2, int delete)
 {
 	int		i;
 	int		s1_len;
@@ -62,6 +66,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		i++;
 	}
 	str[i] = '\0';
+	free(s1);
 	return (str);
 }
 
@@ -72,7 +77,10 @@ int	ft_initialize_strings(char **stacked, char **buffer)
 		return (0);
 	*buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (*buffer == NULL)
+	{
+		free(stacked);
 		return (0);
+	}
 	*stacked[0] = '\0';
 	return (1);
 }
@@ -89,7 +97,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!ft_initialize_strings(&stacked, &buffer))
 		return (NULL);
-	stacked = ft_strjoin(stacked, leftover);
+	stacked = ft_strjoin(stacked, leftover, 0);
 	if (ft_strchr(stacked, '\n'))
 		buffer = stacked;
 	while (!ft_strchr(buffer, '\n'))
@@ -101,11 +109,16 @@ char	*get_next_line(int fd)
 			return (stacked);
 		}
 		else if (byte == 0)
+		{
+			free(stacked);
+			free(buffer);
 			return (NULL);
+		}
 		buffer[byte] = '\0';
-		stacked = ft_strjoin(stacked, buffer);
+		stacked = ft_strjoin(stacked, buffer, 1);
 	}
 	line_len = ft_line_len(buffer);
 	leftover = ft_substr(buffer, line_len + 1, (byte - line_len));
+	//free(buffer);
 	return (ft_substr(stacked, 0, ft_line_len(stacked) + 1));
 }
