@@ -6,7 +6,7 @@
 /*   By: juamanri <juamanri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:27:07 by juamanri          #+#    #+#             */
-/*   Updated: 2025/05/19 11:02:31 by juamanri         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:08:58 by juamanri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	return (str);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+//Free is need if the malloc fails
+char	*ft_strjoin(char *s1, const char *s2)
 {
 	int		i;
 	int		s1_len;
@@ -97,8 +98,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
 	str = (char *)malloc((s1_len + s2_len) + 1);
-	if (!str)
-		return (0);
+	if (str == NULL)
+		return (free(s1), NULL);
 	while (i < s1_len)
 	{
 		str[i] = s1[i];
@@ -110,6 +111,5 @@ char	*ft_strjoin(char *s1, char *s2)
 		i++;
 	}
 	str[i] = '\0';
-	free(s1);
-	return (str);
+	return (free(s1), str);
 }

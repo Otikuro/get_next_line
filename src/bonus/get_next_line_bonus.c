@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juamanri <juamanri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 13:27:10 by juamanri          #+#    #+#             */
-/*   Updated: 2025/05/19 14:38:41 by juamanri         ###   ########.fr       */
+/*   Created: 2025/05/19 14:11:54 by juamanri          #+#    #+#             */
+/*   Updated: 2025/05/19 14:36:15 by juamanri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/get_next_line.h"
+#include "../../headers/get_next_line.h"
 
 int	ft_get_line_len(char *str)
 {
@@ -26,8 +26,9 @@ int	ft_get_line_len(char *str)
 	return (-1);
 }
 
-int	ft_initialize(char **leftover, char **stacked, char **buffer)
+int	ft_initialize(char **leftover, char **stacked, char **buffer, int *byte)
 {
+	*byte = 0;
 	if (*leftover == NULL)
 		*leftover = ft_strdup("");
 	*stacked = ft_strdup("");
@@ -41,23 +42,6 @@ int	ft_initialize(char **leftover, char **stacked, char **buffer)
 	return (free(*leftover), 1);
 }
 
-int	ft_get_stacked()
-{
-	while (ft_get_line_len(buffer) == -1)
-	{
-		byte = read(fd, buffer, BUFFER_SIZE);
-		if (byte == 0 && stacked[0] != '\0')
-		{
-			leftover = ft_strdup("");
-			return (free(buffer), stacked);
-		}
-		else if (byte == 0)
-			return (free(stacked), free(buffer), NULL);
-		buffer[byte] = '\0';
-		stacked = ft_strjoin(stacked, buffer);
-	}
-}
-
 char	*get_next_line(int fd)
 {
 	static char	*leftover;
@@ -66,10 +50,9 @@ char	*get_next_line(int fd)
 	int			byte;
 	int			line_len;
 
-	byte = 0;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!ft_initialize(&leftover, &stacked, &buffer))
+	if (!ft_initialize(&leftover, &stacked, &buffer, &byte))
 		return (NULL);
 	while (ft_get_line_len(buffer) == -1)
 	{
