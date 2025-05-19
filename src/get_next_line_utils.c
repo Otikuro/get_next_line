@@ -6,7 +6,7 @@
 /*   By: juamanri <juamanri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:27:07 by juamanri          #+#    #+#             */
-/*   Updated: 2025/05/14 09:48:06 by juamanri         ###   ########.fr       */
+/*   Updated: 2025/05/19 11:02:31 by juamanri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	return (src_len);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	unsigned int		objective_len;
 	char				*str;
@@ -82,5 +82,34 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (str == NULL)
 		return (NULL);
 	ft_strlcpy(str, &s[start], len + 1);
+	free(s);
+	return (str);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	int		i;
+	int		s1_len;
+	int		s2_len;
+	char	*str;
+
+	i = 0;
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	str = (char *)malloc((s1_len + s2_len) + 1);
+	if (!str)
+		return (0);
+	while (i < s1_len)
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (i < (s1_len + s2_len))
+	{
+		str[i] = s2[i - s1_len];
+		i++;
+	}
+	str[i] = '\0';
+	free(s1);
 	return (str);
 }
