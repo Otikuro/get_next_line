@@ -86,7 +86,6 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	return (str);
 }
 
-//Free is need if the malloc fails
 char	*ft_strjoin(char *s1, const char *s2)
 {
 	int		i;
