@@ -61,7 +61,10 @@ char	*get_next_line(int fd)
 	{
 		byte = read(fd, buffer, BUFFER_SIZE);
 		if (byte == 0 && stacked[0] != '\0')
-			return (leftover = ft_strdup(""), free(buffer), stacked);
+		{
+			leftover = ft_strdup("");
+			return (free(buffer), stacked);
+		}
 		else if (byte == 0)
 			return (free(stacked), free(buffer), NULL);
 		buffer[byte] = '\0';
