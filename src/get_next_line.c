@@ -26,8 +26,10 @@ int	ft_get_newline_index(char *str)
 	return (-1);
 }
 
-int	ft_initialize(char **leftover, char **stacked, char **buffer)
+int	ft_initialize(char **leftover, char **stacked, char **buffer, int fd)
 {
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (0);
 	if (*leftover == NULL)
 		*leftover = ft_strdup("");
 	if (*leftover == NULL)
@@ -53,11 +55,8 @@ char	*get_next_line(int fd)
 	int			line_len;
 
 	byte = 0;
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (!ft_initialize(&leftover, &stacked, &buffer, int fd))
 		return (NULL);
-	if (!ft_initialize(&leftover, &stacked, &buffer))
-		return (NULL);
-
 	while (ft_get_newline_index(buffer) == -1)
 	{
 		byte = read(fd, buffer, BUFFER_SIZE);
@@ -68,7 +67,6 @@ char	*get_next_line(int fd)
 		buffer[byte] = '\0';
 		stacked = ft_strjoin(stacked, buffer);
 	}
-
 	line_len = ft_get_newline_index(buffer);
 	leftover = ft_substr(buffer, line_len + 1, (byte - line_len));
 	return (ft_substr(stacked, 0, ft_get_newline_index(stacked) + 1));
