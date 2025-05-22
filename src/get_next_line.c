@@ -6,7 +6,7 @@
 /*   By: juamanri <juamanri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:27:10 by juamanri          #+#    #+#             */
-/*   Updated: 2025/05/19 14:38:41 by juamanri         ###   ########.fr       */
+/*   Updated: 2025/05/22 09:50:33 by juamanri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*get_next_line(int fd)
 	int			line_len;
 
 	byte = 0;
-	if (!ft_initialize(&leftover, &stacked, &buffer, int fd))
+	if (!ft_initialize(&leftover, &stacked, &buffer, fd))
 		return (NULL);
 	while (ft_get_newline_index(buffer) == -1)
 	{

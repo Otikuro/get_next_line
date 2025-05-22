@@ -6,7 +6,7 @@
 /*   By: juamanri <juamanri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 11:55:38 by juamanri          #+#    #+#             */
-/*   Updated: 2025/05/19 13:22:29 by juamanri         ###   ########.fr       */
+/*   Updated: 2025/05/22 09:52:13 by juamanri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	main(void)
 	int		fd;
 	char	*text;
 
-	fd = open("hola.txt", O_RDONLY);
-	while ((text = get_next_line(fd)))
+	fd = open("lorem.txt", O_RDONLY);
+	while ((text = get_next_line(1)))
 	{
 		printf("%s", text);
 		free(text);
