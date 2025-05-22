@@ -1,0 +1,12 @@
+Esta linea tiene mas de 20 caracteres, para comprobar que la funcion es correcta, ultima palabra
+Hola Mundo!
+
+	Escrito
+por
+Juan. 
+	
+   
+Otra
+linea
+extra
+en el archivo.
