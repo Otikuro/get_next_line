@@ -6,7 +6,7 @@
 /*   By: juamanri <juamanri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 11:02:16 by juamanri          #+#    #+#             */
-/*   Updated: 2025/05/26 09:33:35 by juamanri         ###   ########.fr       */
+/*   Updated: 2025/05/26 12:29:43 by juamanri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_get_newline_index(char *str)
 
 int	ft_initialize(char **leftover, char **stack, char **buff, int fd)
 {
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
 	if (*leftover == NULL)
 		*leftover = ft_strdup("");
