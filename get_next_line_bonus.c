@@ -6,11 +6,11 @@
 /*   By: juamanri <juamanri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 11:02:16 by juamanri          #+#    #+#             */
-/*   Updated: 2025/05/23 12:20:21 by juamanri         ###   ########.fr       */
+/*   Updated: 2025/05/26 09:33:35 by juamanri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./get_next_line.h"
+#include "./get_next_line_bonus.h"
 
 int	ft_get_newline_index(char *str)
 {

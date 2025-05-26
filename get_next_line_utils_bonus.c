@@ -6,11 +6,11 @@
 /*   By: juamanri <juamanri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 12:18:13 by juamanri          #+#    #+#             */
-/*   Updated: 2025/05/23 12:18:27 by juamanri         ###   ########.fr       */
+/*   Updated: 2025/05/26 09:33:56 by juamanri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./get_next_line.h"
+#include "./get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *string)
 {
