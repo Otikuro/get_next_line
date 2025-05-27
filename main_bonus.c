@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: juamanri <juamanri@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/27 13:44:08 by juamanri          #+#    #+#             */
+/*   Updated: 2025/05/27 13:44:24 by juamanri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./get_next_line_bonus.h"
 #include <stdio.h>
 #include <unistd.h>
@@ -74,6 +86,22 @@ int	main(void)
 	text = get_next_line(fd1);
 	printf("Texto 1: %s", text);
 	free(text);
+
+	while ((text = get_next_line(fd1)))
+	{
+		printf("%s", text);
+		free(text);
+	}
+		while ((text = get_next_line(fd2)))
+	{
+		printf("%s", text);
+		free(text);
+	}
+		while ((text = get_next_line(fd3)))
+	{
+		printf("%s", text);
+		free(text);
+	}
 
 	close(fd1);
 	close(fd2);
